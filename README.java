@@ -2,14 +2,10 @@ pipeline {
     agent any
 
     stages {
-        stage('Compilar y analizar') {
+        stage('Análisis con SonarQube') {
             steps {
-                // 1. Compila
-                sh 'mvn clean compile'
-                
-                // 2. Analiza con SonarQube
                 withSonarQubeEnv('SonarCloud-ISTB') {
-                    sh 'mvn sonar:sonar'
+                    sh 'sonar-scanner'
                 }
             }
         }
